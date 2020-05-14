@@ -65,11 +65,11 @@ function Formed() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setFormState({ name: '', email: '', password: '', terms: false });
     axios
       .post('https://reqres.in/api/users', formState)
-      .then(res => setUser(res.data))
+      .then(res => setUser([...user, res.data]))
       .catch(console.log);
+    setFormState({ name: '', email: '', password: '', terms: false });
   };
 
   return (
@@ -136,19 +136,14 @@ function Formed() {
               ) : null}
             </Label>
           </FormGroup>
-          <Button block color='primary' className='shadow mt-3'>
+          <Button block color='primary' className='shadow mt-3 mb-4'>
             Submit
           </Button>
         </Form>
       </Col>
-      <Col md='6'>
-        <h2 className='text-center'>Users</h2>
-        <UserCard
-          key={user.id}
-          createdAt={user.createdAt}
-          name={user.name}
-          email={user.email}
-        />
+      <Col sm='12' md={{ size: 4, offset: 2 }}>
+        <h2 className='text-center mb-4'>Users</h2>
+        {user.length > 0 && <UserCard user={user} />}
       </Col>
     </Row>
   );
