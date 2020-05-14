@@ -97,6 +97,12 @@ function Formed() {
               placeholder='Email'
               value={formState.email}
               onChange={changeHandler}
+              invalid={errorState.email.length > 0 ? true : false}
+              valid={
+                errorState.email.length === 0 && formState.email.length > 1
+                  ? true
+                  : false
+              }
             />
             {errorState.email.length > 0 ? (
               <small className='text-danger d-block mt-2'>
@@ -113,6 +119,13 @@ function Formed() {
               placeholder='Password'
               value={formState.password}
               onChange={changeHandler}
+              invalid={errorState.password.length > 0 ? true : false}
+              valid={
+                errorState.password.length === 0 &&
+                formState.password.length > 1
+                  ? true
+                  : false
+              }
             />
             {errorState.password.length > 0 ? (
               <small className='text-danger d-block mt-2'>
